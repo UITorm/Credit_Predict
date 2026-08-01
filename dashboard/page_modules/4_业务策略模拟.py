@@ -6,8 +6,6 @@
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
-import sys
-sys.path.append('..')
 from utils import load_model, load_test_data, get_test_predictions
 from sklearn.metrics import precision_score, recall_score, f1_score
 

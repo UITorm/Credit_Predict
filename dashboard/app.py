@@ -5,7 +5,9 @@
 
 import streamlit as st
 import os
+import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASE_DIR)
 
 st.set_page_config(
     page_title='信贷违约预测仪表板',

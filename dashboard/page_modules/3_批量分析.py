@@ -7,9 +7,7 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import numpy as np
-import sys
 
-sys.path.append('..')
 from utils import load_model, predict
 
 st.title('📂 批量分析')

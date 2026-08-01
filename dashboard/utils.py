@@ -6,6 +6,8 @@ import pandas as pd
 import numpy as np
 import joblib
 import streamlit as st
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # ==================== 全局模型加载（缓存） ====================
@@ -13,9 +15,9 @@ import streamlit as st
 @st.cache_resource
 def load_model():
     """加载最终模型及配置"""
-    model_dict = joblib.load('../models/final_xgb.pkl')
+    model_path = os.path.join(BASE_DIR, 'models', 'final_xgb.pkl')
+    model_dict = joblib.load(model_path)
     return model_dict
-
 
 # ==================== 输入特征编码映射 ====================
 
@@ -186,31 +188,9 @@ def predict(df_features, model_dict, threshold):
 def load_test_data():
     """
     加载测试集特征和标签。
-    分割逻辑与训练时一致：8:1:1，random_state=42。
     """
-    from sklearn.model_selection import train_test_split
-
-    X = pd.read_csv('../input/features.csv')
-    y = pd.read_csv('../input/labels.csv')['isDefault']
-
-    # 合并回炉特征（若模型需要）
-    burnin_cols = ['delinquency_2years', 'revolUtil', 'credit_history_years', 'annualIncome']
-    model_dict = load_model()
-    features_list = model_dict['features']
-
-    if any(c in features_list for c in burnin_cols):
-        df_clean = pd.read_csv('../input/cleaned_data.csv')
-        for col in burnin_cols:
-            if col in df_clean.columns and col in features_list:
-                X[col] = df_clean[col].values
-
-    X = X[features_list]
-
-    # 8:1:1 分割
-    X_temp, X_test, y_temp, y_test = train_test_split(
-        X, y, test_size=0.1, stratify=y, random_state=42
-    )
-
+    X_test = pd.read_csv(os.path.join(BASE_DIR, 'data', 'X_test.csv'))
+    y_test = pd.read_csv(os.path.join(BASE_DIR, 'data', 'y_test.csv')).squeeze()
     return X_test, y_test
 
 @st.cache_data

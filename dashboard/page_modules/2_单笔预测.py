@@ -6,9 +6,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
-import sys
 
-sys.path.append('..')
 from utils import load_model, build_features, predict
 
 st.title('🔍 单笔预测')

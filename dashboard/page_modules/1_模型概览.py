@@ -8,9 +8,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 import numpy as np
-import sys
 
-sys.path.append('..')
 from utils import load_model
 
 model_dict = load_model()
