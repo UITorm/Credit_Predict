@@ -4,6 +4,8 @@
 # ============================================================
 
 import streamlit as st
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 st.set_page_config(
     page_title='信贷违约预测仪表板',
@@ -41,5 +43,7 @@ pages = {
 
 page = st.sidebar.radio('选择页面', list(pages.keys()))
 page_file = pages[page]
-exec(open(f'page_modules/{page_file}', encoding='utf-8').read())
-
+page_path = os.path.join(BASE_DIR, 'page_modules', page_file)
+with open(page_path, encoding='utf-8') as f:
+    code = compile(f.read(), page_path, 'exec')
+    exec(code)
