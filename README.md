@@ -8,21 +8,6 @@
 
 信贷违约是金融机构面临的核心风险之一。本项目构建机器学习模型，在贷款审批环节预测申请人的违约概率，为贷前风控提供数据驱动的决策支持。
 
-### 核心成果
-
-| 指标 | 数值 |
-|------|------|
-| 最终模型 | XGBoost（Optuna 优化） |
-| 测试集 AUC | **72.89%** |
-| 测试集 Recall | **57.04%** |
-| 测试集 F1 | **44.47%** |
-| 特征数 | 21（从 46 个原始特征经三轮筛选） |
-| 对比模型 | 6 个（LR / RF / XGBoost / LightGBM / CatBoost / KNN） |
-
-### 交互式仪表板
-
-基于 Streamlit + Plotly 构建，支持单笔预测、批量分析、业务策略模拟。
-
 ---
 
 ## 数据说明
@@ -61,6 +46,7 @@ pip install -r requirements.txt
 ### 交互式仪表板
 
 部署地址：https://zh-lee-credit-predict.streamlit.app/ （Streamlit Community Cloud）
+注：Page 4(业务策略模拟)需要一段时间加载。
 
 #### 页面功能
 
