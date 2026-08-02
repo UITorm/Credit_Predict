@@ -15,8 +15,8 @@ model_dict = load_model()
 features_list = model_dict['features']
 threshold = st.session_state.get('threshold', 0.558)
 
-st.title('📊 模型概览')
-st.markdown('信贷违约预测模型 — XGBoost 优化版')
+st.title('模型概览')
+st.markdown('信贷违约预测模型 — XGBoost 优化')
 
 # ==================== 顶部：关键指标卡片 ====================
 
@@ -98,8 +98,8 @@ st.plotly_chart(fig_cm, use_container_width=True)
 
 # 解读
 st.caption(
-    f'✅ 正确拒绝（TN）：46,551 笔   |   '
-    f'❌ 误拒（FP）：14,804 笔   |   '
-    f'⚠️ 漏网（FN）：6,356 笔   |   '
-    f'🚫 正确拦截（TP）：8,898 笔'
+    f'正确拒绝（TN）：46,551 笔   |   '
+    f'误拒（FP）：14,804 笔   |   '
+    f'漏网（FN）：6,356 笔   |   '
+    f'正确拦截（TP）：8,898 笔'
 )

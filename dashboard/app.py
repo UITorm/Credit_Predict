@@ -12,18 +12,17 @@ sys.path.insert(0, BASE_DIR)
 
 st.set_page_config(
     page_title='信贷违约预测仪表板',
-    page_icon='📊',
     layout='wide',
     initial_sidebar_state='expanded'
 )
 
 # ==================== 侧边栏 ====================
 
-st.sidebar.title('📊 信贷违约预测')
+st.sidebar.title('信贷违约预测')
 
 # 页面导航
 st.sidebar.markdown('---')
-st.sidebar.markdown('### 📁 页面导航')
+st.sidebar.markdown('### 页面导航')
 
 pages = {
     '模型概览': '1_模型概览.py',

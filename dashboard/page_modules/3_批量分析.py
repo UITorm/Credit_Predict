@@ -10,7 +10,7 @@ import numpy as np
 
 from utils import load_model, predict
 
-st.title('📂 批量分析')
+st.title('批量分析')
 st.markdown('上传 CSV 文件，批量预测违约概率并下载结果')
 
 # 获取全局阈值
@@ -35,9 +35,9 @@ if uploaded_file is not None:
     missing_cols = [c for c in features_list if c not in df_input.columns]
 
     if missing_cols:
-        st.error(f'❌ 缺少 {len(missing_cols)} 个特征列：{missing_cols[:10]}...')
+        st.error(f'缺少 {len(missing_cols)} 个特征列：{missing_cols[:10]}...')
     else:
-        st.success(f'✅ 已加载 {len(df_input):,} 条样本')
+        st.success(f'已加载 {len(df_input):,} 条样本')
 
         # 预测
         df_features = df_input[features_list]
@@ -103,7 +103,7 @@ if uploaded_file is not None:
 
         csv = df_input.to_csv(index=False).encode('utf-8-sig')
         st.download_button(
-            label='📥 下载完整预测结果 (CSV)',
+            label='下载完整预测结果 (CSV)',
             data=csv,
             file_name='prediction_results.csv',
             mime='text/csv'

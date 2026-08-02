@@ -9,11 +9,11 @@ import numpy as np
 from utils import load_model, load_test_data, get_test_predictions
 from sklearn.metrics import precision_score, recall_score, f1_score
 
-st.title('📈 业务策略模拟')
+st.title('业务策略模拟')
 
 # ==================== 阈值滑块（最显眼位置） ====================
 
-st.markdown('### ⚙️ 违约判定阈值')
+st.markdown('### 违约判定阈值')
 threshold = st.slider(
     '预测概率 ≥ 阈值时判定为违约。拖动滑块实时观察指标变化',
     min_value=0.10, max_value=0.90,
@@ -23,9 +23,9 @@ threshold = st.slider(
 
 # 参考策略
 col_ref1, col_ref2, col_ref3 = st.columns(3)
-col_ref1.info(f'🛡️ 保守策略 ≈ 0.48\n\nRecall 高，尽量不漏坏客户')
-col_ref2.success(f'⚖️ 平衡策略 ≈ 0.56\n\nF1 最优，均衡漏网与误拒')
-col_ref3.warning(f'📈 激进策略 ≈ 0.65\n\nPrecision 优先，仅拒绝明显违约者')
+col_ref1.info(f'保守策略 ≈ 0.48\n\nRecall 高，尽量不漏坏客户')
+col_ref2.success(f'平衡策略 ≈ 0.56\n\nF1 最优，均衡漏网与误拒')
+col_ref3.warning(f'激进策略 ≈ 0.65\n\nPrecision 优先，仅拒绝明显违约者')
 
 st.markdown('---')
 

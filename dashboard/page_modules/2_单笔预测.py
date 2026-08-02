@@ -8,12 +8,12 @@ import plotly.graph_objects as go
 import numpy as np
 from utils import load_model, build_features, predict
 
-st.title('🔍 单笔预测')
+st.title('单笔预测')
 st.markdown('输入贷款信息，即时获得违约概率和决策建议')
 
 # ==================== 阈值滑块（最显眼位置） ====================
 
-st.markdown('### ⚙️ 违约判定阈值')
+st.markdown('### 违约判定阈值')
 threshold = st.slider(
     '预测概率 ≥ 阈值时判定为违约',
     min_value=0.10, max_value=0.90,
@@ -50,7 +50,7 @@ with st.form('predict_form'):
         regionCode = st.number_input('地区编码', min_value=0, max_value=50, value=10, step=1)
         openAcc = st.number_input('未结信用额度数', min_value=0, max_value=50, value=8, step=1)
 
-    submitted = st.form_submit_button('🔮 预测违约概率')
+    submitted = st.form_submit_button('预测违约概率')
 
 # ==================== 预测结果 ====================
 
