@@ -6,6 +6,7 @@
 import streamlit as st
 import os
 import sys
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
 
@@ -16,24 +17,12 @@ st.set_page_config(
     initial_sidebar_state='expanded'
 )
 
-# 全局阈值（侧边栏）
+# ==================== 侧边栏 ====================
+
 st.sidebar.title('📊 信贷违约预测')
+
+# 页面导航
 st.sidebar.markdown('---')
-st.sidebar.markdown('### ⚙️ 全局阈值')
-st.sidebar.caption('适用于页面 2（单笔预测）和页面 4（策略模拟）')
-
-threshold = st.sidebar.slider(
-    '违约判定阈值',
-    min_value=0.10, max_value=0.90,
-    value=0.558, step=0.01,
-    help='预测概率 ≥ 阈值时判定为违约。页面 4 实时响应，页面 2 在提交时生效。'
-)
-st.session_state.threshold = threshold
-
-st.sidebar.markdown(f'当前阈值：**{threshold:.2f}**')
-st.sidebar.markdown('---')
-st.sidebar.caption('数据来源：阿里天池信贷违约数据集')
-
 st.sidebar.markdown('### 📁 页面导航')
 
 pages = {
@@ -44,6 +33,12 @@ pages = {
 }
 
 page = st.sidebar.radio('选择页面', list(pages.keys()))
+
+st.sidebar.markdown('---')
+st.sidebar.caption('数据来源：阿里天池信贷违约数据集')
+
+# ==================== 加载页面 ====================
+
 page_file = pages[page]
 page_path = os.path.join(BASE_DIR, 'page_modules', page_file)
 with open(page_path, encoding='utf-8') as f:

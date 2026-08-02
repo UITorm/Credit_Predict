@@ -1,19 +1,27 @@
 # ============================================================
-# dashboard/pages/2_单笔预测.py
+# dashboard/page_modules/2_单笔预测.py
 # 页面 2：单笔贷款违约预测
 # ============================================================
 
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
-
 from utils import load_model, build_features, predict
 
 st.title('🔍 单笔预测')
-st.markdown('手动输入贷款信息，即时获得违约概率和决策建议')
+st.markdown('输入贷款信息，即时获得违约概率和决策建议')
 
-# 获取全局阈值
-threshold = st.session_state.get('threshold', 0.558)
+# ==================== 阈值滑块（最显眼位置） ====================
+
+st.markdown('### ⚙️ 违约判定阈值')
+threshold = st.slider(
+    '预测概率 ≥ 阈值时判定为违约',
+    min_value=0.10, max_value=0.90,
+    value=0.558, step=0.01,
+    help='拖动调整决策阈值。阈值越低，越倾向拒绝（高 Recall）；阈值越高，越倾向通过（高 Precision）'
+)
+st.caption(f'当前阈值：**{threshold:.2f}**  |  低于阈值 → 建议通过  |  高于阈值 → 建议拒绝')
+st.markdown('---')
 
 # 加载模型
 model_dict = load_model()
@@ -31,7 +39,7 @@ with st.form('predict_form'):
         st.markdown('**信用评级**')
         subGrade = st.selectbox('贷款等级',
                                 [f'{g}{i}' for g in ['A', 'B', 'C', 'D', 'E', 'F', 'G'] for i in range(1, 6)],
-                                index=12)  # 默认 C1
+                                index=12)
 
     with col2:
         st.markdown('**还款能力**')
@@ -64,7 +72,6 @@ if submitted:
     decision_val = str(decision[0])
     risk_val = str(risk[0])
 
-    # 仪表盘
     st.markdown('---')
     col_gauge, col_info = st.columns([1, 1])
 
