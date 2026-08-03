@@ -9,7 +9,28 @@ import numpy as np
 from utils import load_model, load_test_data, get_test_predictions
 from sklearn.metrics import precision_score, recall_score, f1_score
 
-st.title('业务策略模拟')
+# ==================== 顶部栏 ====================
+
+col_back, col_title = st.columns([1, 11])
+
+with col_back:
+    if st.button('返回', key='back1', use_container_width=True,
+                 type='secondary'):
+        st.session_state.page = 'home'
+        st.rerun()
+
+with col_title:
+    st.markdown(
+        '<h2 style="text-align: center; margin-top: 0;">业务策略模拟</h2>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<p style="text-align: center; color: #888;">拖拽阈值滑块，实时观察召回率、精确率变化及业务损失测算</p>',
+        unsafe_allow_html=True
+    )
+
+st.divider()
+
 
 # ==================== 阈值滑块（最显眼位置） ====================
 

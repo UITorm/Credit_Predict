@@ -8,8 +8,28 @@ import plotly.graph_objects as go
 import numpy as np
 from utils import load_model, build_features, predict
 
-st.title('单笔预测')
-st.markdown('输入贷款信息，即时获得违约概率和决策建议')
+# ==================== 顶部栏 ====================
+
+col_back, col_title = st.columns([1, 11])
+
+with col_back:
+    if st.button('返回', key='back1', use_container_width=True,
+                 type='secondary'):
+        st.session_state.page = 'home'
+        st.rerun()
+
+with col_title:
+    st.markdown(
+        '<h2 style="text-align: center; margin-top: 0;">单笔预测</h2>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<p style="text-align: center; color: #888;">手动输入贷款信息，即时获得违约概率、风险等级和决策建议</p>',
+        unsafe_allow_html=True
+    )
+
+st.divider()
+
 
 # ==================== 阈值滑块（最显眼位置） ====================
 

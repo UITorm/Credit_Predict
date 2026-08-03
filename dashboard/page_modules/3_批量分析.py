@@ -10,8 +10,28 @@ import numpy as np
 
 from utils import load_model, predict
 
-st.title('批量分析')
-st.markdown('上传 CSV 文件，批量预测违约概率并下载结果')
+# ==================== 顶部栏 ====================
+
+col_back, col_title = st.columns([1, 11])
+
+with col_back:
+    if st.button('返回', key='back1', use_container_width=True,
+                 type='secondary'):
+        st.session_state.page = 'home'
+        st.rerun()
+
+with col_title:
+    st.markdown(
+        '<h2 style="text-align: center; margin-top: 0;">批量分析</h2>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<p style="text-align: center; color: #888;">上传 CSV 文件，批量预测违约概率并下载完整结果</p>',
+        unsafe_allow_html=True
+    )
+
+st.divider()
+
 
 # 获取全局阈值
 threshold = st.session_state.get('threshold', 0.558)

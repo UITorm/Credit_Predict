@@ -15,8 +15,27 @@ model_dict = load_model()
 features_list = model_dict['features']
 threshold = st.session_state.get('threshold', 0.558)
 
-st.title('模型概览')
-st.markdown('信贷违约预测模型 — XGBoost 优化')
+# ==================== 顶部栏 ====================
+
+col_back, col_title = st.columns([1, 11])
+
+with col_back:
+    if st.button('返回', key='back1', use_container_width=True,
+                 type='secondary'):
+        st.session_state.page = 'home'
+        st.rerun()
+
+with col_title:
+    st.markdown(
+        '<h2 style="text-align: center; margin-top: 0;">模型概览</h2>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<p style="text-align: center; color: #888;">关键指标、特征重要性、优化历程与混淆矩阵</p>',
+        unsafe_allow_html=True
+    )
+
+st.divider()
 
 # ==================== 顶部：关键指标卡片 ====================
 
